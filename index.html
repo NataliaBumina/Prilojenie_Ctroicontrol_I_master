@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>СтройконтрольИмастер — Оцифруем хаос на стройке</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    .gradient-hero {
+      background: linear-gradient(180deg, #FFF9E6 0%, #FFD54A 100%);
+    }
+    
+    .cta-button {
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      background: #E65100 !important;
+      transform: scale(1.05);
+    }
+    
+    .badge {
+      transition: transform 0.2s ease;
+    }
+    
+    .badge:hover {
+      transform: translateY(-3px);
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #222222;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #FF8C42 !important;
+      box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.2);
+    }
+    
+    .form-card {
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body class="bg-[#FFF9E6]">
+
+  <!-- Header -->
+  <header class="bg-[#FFD700] sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-[#222222] rounded-lg flex items-center justify-center">
+            <span class="text-[#FFD700] font-bold text-xl">СК</span>
+          </div>
+          <span class="font-bold text-[#222222] text-lg hidden sm:block">СтройконтрольИмастер</span>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#about" class="nav-link text-[#222222] font-semibold">О проекте</a>
+          <a href="#problems" class="nav-link text-[#222222] font-semibold">Проблемы</a>
+          <a href="#exchange" class="nav-link text-[#222222] font-semibold">От вас / От нас</a>
+          <a href="#form" class="nav-link text-[#222222] font-semibold">Форма участия</a>
+          <a href="#contacts" class="nav-link text-[#222222] font-semibold">Контакты</a>
+        </nav>
+        
+        <!-- Mobile menu button -->
+        <button id="menuBtn" class="md:hidden p-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div id="mobileMenu" class="mobile-menu fixed top-0 left-0 w-64 h-full bg-[#FFD700] z-50 md:hidden">
+      <div class="p-4">
+        <button id="closeMenu" class="mb-6">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        <nav class="flex flex-col gap-4">
+          <a href="#about" class="text-[#222222] font-semibold py-2">О проекте</a>
+          <a href="#problems" class="text-[#222222] font-semibold py-2">Проблемы</a>
+          <a href="#exchange" class="text-[#222222] font-semibold py-2">От вас / От нас</a>
+          <a href="#form" class="text-[#222222] font-semibold py-2">Форма участия</a>
+          <a href="#contacts" class="text-[#222222] font-semibold py-2">Контакты</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Block -->
+  <section id="about" class="gradient-hero min-h-[90vh] flex items-center py-20">
+    <div class="max-w-5xl mx-auto px-4 text-center" data-aos="fade-up">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#222222] leading-tight mb-6">
+        Оцифруем хаос на стройке: 
+        <span class="text-[#FF8C42]">контроль, учёт и координация</span> 
+        в одном приложении
+      </h1>
+      <p class="text-lg sm:text-xl text-[#222222] max-w-3xl mx-auto mb-10 leading-relaxed">
+        Лёгкий операционный контроль для технадзора и мастера. Учёт инструментов, материалов и соблюдение технологии строительства — <strong>без бумаги и телеграм-чатов</strong>.
+      </p>
+      <a href="#form" 
+         class="cta-button inline-block bg-[#FF8C42] text-[#222222] font-bold text-lg px-10 py-4 rounded-lg shadow-lg">
+        Поучаствовать в разработке
+      </a>
+      
+      <!-- Decorative elements -->
+      <div class="mt-16 flex justify-center gap-8 flex-wrap">
+        <div class="flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full">
+          <span class="text-2xl">📱</span>
+          <span class="font-medium">Мобильное приложение</span>
+        </div>
+        <div class="flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full">
+          <span class="text-2xl">⚡</span>
+          <span class="font-medium">Быстрый старт</span>
+        </div>
+        <div class="flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full">
+          <span class="text-2xl">🔒</span>
+          <span class="font-medium">Безопасность данных</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problems Block -->
+  <section id="problems" class="bg-[#FAF3DD] py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl sm:text-4xl font-bold text-[#222222] text-center mb-4" data-aos="fade-up">
+        Ваша боль — наш фокус
+      </h2>
+      <p class="text-center text-[#222222]/70 mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        Мы знаем, с какими проблемами вы сталкиваетесь каждый день на стройке
+      </p>
+      
+      <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+        <span class="badge bg-[#FFD54A] text-[#222222] px-5 py-3 rounded-full font-medium text-base shadow-sm cursor-default">
+          ✅ Регламент на словах?
+        </span>
+        <span class="badge bg-[#FFD54A] text-[#222222] px-5 py-3 rounded-full font-medium text-base shadow-sm cursor-default">
+          ❌ Предписания теряются
+        </span>
+        <span class="badge bg-[#FFD54A] text-[#222222] px-5 py-3 rounded-full font-medium text-base shadow-sm cursor-default">
+          📦 Учёт материалов — хаос
+        </span>
+        <span class="badge bg-[#FFD54A] text-[#222222] px-5 py-3 rounded-full font-medium text-base shadow-sm cursor-default">
+          ⏰ Заявки запаздывают
+        </span>
+        <span class="badge bg-[#FFD54A] text-[#222222] px-5 py-3 rounded-full font-medium text-base shadow-sm cursor-default">
+          📑 Документация в последний момент
+        </span>
+        <span class="badge bg-[#FFD54A] text-[#222222] px-5 py-3 rounded-full font-medium text-base shadow-sm cursor-default">
+          🗣 Протоколы на коленке
+        </span>
+        <span class="badge bg-[#FFD54A] text-[#222222] px-5 py-3 rounded-full font-medium text-base shadow-sm cursor-default">
+          🔧 Инструмент теряется
+        </span>
+        <span class="badge bg-[#FFD54A] text-[#222222] px-5 py-3 rounded-full font-medium text-base shadow-sm cursor-default">
+          📊 Отчёты вручную
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- From You / From Us Block -->
+  <section id="exchange" class="py-20 bg-[#FFF9E6]">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl sm:text-4xl font-bold text-[#222222] text-center mb-12" data-aos="fade-up">
+        Взаимовыгодное сотрудничество
+      </h2>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- От вас -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg" data-aos="fade-right">
+          <div class="w-16 h-16 bg-[#FFF9E6] rounded-full flex items-center justify-center mb-6 mx-auto">
+            <span class="text-3xl">🤝</span>
+          </div>
+          <h3 class="text-2xl font-bold text-[#222222] text-center mb-6">От вас</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-[#FF8C42] font-bold text-xl">→</span>
+              <span class="text-[#222222]">Поделитесь болями в процессе работы</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#FF8C42] font-bold text-xl">→</span>
+              <span class="text-[#222222]">Опишите, как контролируете задачи</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#FF8C42] font-bold text-xl">→</span>
+              <span class="text-[#222222]">Расскажите о пробелах в учёте</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#FF8C42] font-bold text-xl">→</span>
+              <span class="text-[#222222]">Предложите важные функции</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- От нас -->
+        <div class="bg-[#FFD700] rounded-2xl p-8 shadow-lg" data-aos="fade-left">
+          <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 mx-auto">
+            <span class="text-3xl">🚀</span>
+          </div>
+          <h3 class="text-2xl font-bold text-[#222222] text-center mb-6">От нас</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-[#222222] font-bold text-xl">→</span>
+              <span class="text-[#222222]">15-летний опыт + ваши пожелания</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#222222] font-bold text-xl">→</span>
+              <span class="text-[#222222]">Доступ к тестированию приложения</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#222222] font-bold text-xl">→</span>
+              <span class="text-[#222222]">Автоматизация рутинных процессов</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[#222222] font-bold text-xl">→</span>
+              <span class="text-[#222222]">Скидка на лицензию при запуске</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section id="form" class="py-20 bg-[#FAF3DD]">
+    <div class="max-w-2xl mx-auto px-4">
+      <div class="form-card bg-white rounded-2xl p-8 sm:p-10" data-aos="fade-up">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#222222] text-center mb-2">
+          Присоединяйтесь к разработке
+        </h2>
+        <p class="text-center text-[#222222]/70 mb-8">
+          Заполните форму и станьте частью команды
+        </p>
+        
+        <form id="participationForm" onsubmit="sendToTelegram(event)">
+          <div class="space-y-4">
+            <input
+              type="text"
+              name="org"
+              placeholder="Название организации*"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg transition-all"
+              required>
+            
+            <input
+              type="text"
+              name="name"
+              placeholder="ФИО контактного лица*"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg transition-all"
+              required>
+            
+            <input
+              type="tel"
+              name="tel"
+              placeholder="Телефон для связи (Telegram/WhatsApp)*"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg transition-all"
+              required>
+            
+            <input
+              type="text"
+              name="city"
+              placeholder="Город*"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg transition-all"
+              required>
+            
+            <select
+              name="role"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg transition-all text-gray-500"
+              required>
+              <option value="" disabled selected>Вид деятельности*</option>
+              <option value="Технадзор">Технадзор</option>
+              <option value="Прораб">Прораб</option>
+              <option value="Руководитель строительной организации">Руководитель строительной организации</option>
+              <option value="Бригадир">Бригадир</option>
+              <option value="Другое">Другое</option>
+            </select>
+            
+            <textarea
+              name="problem"
+              placeholder="Опишите вашу главную проблему на стройке (необязательно)"
+              class="w-full px-4 py-3 border border-gray-200 rounded-lg transition-all min-h-[120px] resize-none"></textarea>
+            
+            <div class="flex items-start gap-3 mt-4">
+              <input type="checkbox" id="privacy" class="mt-1" required>
+              <label for="privacy" class="text-sm text-[#222222]/70">
+                Я согласен с <a href="#" onclick="openModal('privacy')" class="text-[#FF8C42] underline">политикой конфиденциальности</a> и даю согласие на обработку персональных данных
+              </label>
+            </div>
+          </div>
+          
+          <button
+            type="submit"
+            id="submitBtn"
+            class="cta-button w-full bg-[#FF8C42] text-[#222222] font-bold text-lg py-4 rounded-lg mt-6">
+            Отправить заявку
+          </button>
+        </form>
+        
+        <!-- Success message -->
+        <div id="successMessage" class="hidden text-center py-8">
+          <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-[#222222] mb-2">Спасибо!</h3>
+          <p class="text-[#222222]/70">Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contacts" class="bg-[#222222] text-white py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center justify-between mb-8">
+        <!-- Logo -->
+        <div class="flex items-center gap-4 mb-6 md:mb-0">
+          <div class="w-14 h-14 bg-[#FFD700] rounded-lg flex items-center justify-center">
+            <span class="text-[#222222] font-bold text-xl">СК</span>
+          </div>
+          <div>
+            <h3 class="text-[#FF8C42] font-bold text-xl">СтройконтрольИмастер</h3>
+            <p class="text-white/70 text-sm">Своевременно. Беспрекословно.</p>
+          </div>
+        </div>
+        
+        <!-- Contact -->
+        <div class="text-center md:text-right">
+          <p class="text-white/70 mb-2">Связаться с нами:</p>
+          <a href="https://t.me/tshingareev" target="_blank" 
+             class="inline-flex items-center gap-2 text-[#FF8C42] hover:underline">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.751-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.121.099.154.232.17.325.015.094.034.31.019.478z"/>
+            </svg>
+            Telegram @tshingareev
+          </a>
+        </div>
+      </div>
+      
+      <!-- Links -->
+      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm">
+        <a href="#" onclick="openModal('privacy')" class="text-[#FF8C42] hover:underline">Политика конфиденциальности</a>
+        <a href="#" onclick="openModal('terms')" class="text-[#FF8C42] hover:underline">Соглашение о персональных данных</a>
+      </div>
+      
+      <p class="text-center text-white/50 text-sm mt-8">
+        © 2024 СтройконтрольИмастер. Все права защищены.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Privacy Modal -->
+  <div id="modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white p-6 border-b flex items-center justify-between">
+        <h2 id="modalTitle" class="text-xl font-bold text-[#222222]">Политика конфиденциальности</h2>
+        <button onclick="closeModal()" class="p-2 hover:bg-gray-100 rounded-lg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="modalContent" class="p-6 text-[#222222]/80">
+        <!-- Content will be inserted by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- AOS Library -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const closeMenuBtn = document.getElementById('closeMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+    });
+    
+    closeMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+    });
+    
+    // Close menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+
+    // Form submission
+    function sendToTelegram(event) {
+      event.preventDefault();
+      
+      const form = document.getElementById('participationForm');
+      const formData = new FormData(form);
+      const submitBtn = document.getElementById('submitBtn');
+      
+      // Disable button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправка...';
+      
+      const message = `📝 *Новая заявка на участие!*
+
+🏢 *Организация:* ${formData.get('org')}
+👤 *ФИО:* ${formData.get('name')}
+📞 *Телефон:* ${formData.get('tel')}
+🏙 *Город:* ${formData.get('city')}
+🔧 *Должность:* ${formData.get('role')}
+💬 *Проблема:* ${formData.get('problem') || 'Не указана'}`;
+
+      // Replace with your actual bot token and chat ID
+      const telegramToken = 'YOUR_TELEGRAM_BOT_TOKEN';
+      const chatId = 'YOUR_CHAT_ID'; // e.g., @tshingareev or numeric ID
+
+      // For demo purposes, show success message
+      // In production, uncomment the fetch below and add your credentials
+      
+      /*
+      fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: 'Markdown'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          showSuccess();
+        } else {
+          throw new Error('Telegram API error');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Ошибка отправки. Попробуйте позже или свяжитесь с нами напрямую в Telegram.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Отправить заявку';
+      });
+      */
+      
+      // Demo: simulate success
+      setTimeout(() => {
+        showSuccess();
+      }, 1000);
+    }
+    
+    function showSuccess() {
+      document.getElementById('participationForm').classList.add('hidden');
+      document.getElementById('successMessage').classList.remove('hidden');
+    }
+
+    // Modal functions
+    const privacyContent = `
+      <h3 class="font-bold text-lg mb-4">1. Сбор данных</h3>
+      <p class="mb-4">Мы собираем только те данные, которые вы добровольно указываете в форме: ФИО, название организации, телефон, город, должность и описание проблемы.</p>
+      
+      <h3 class="font-bold text-lg mb-4">2. Использование данных</h3>
+      <p class="mb-2">Данные используются исключительно для:</p>
+      <ul class="list-disc pl-6 mb-4 space-y-2">
+        <li>Связи с вами в рамках разработки приложения;</li>
+        <li>Учета ваших пожеланий при проектировании функционала;</li>
+        <li>Информирования о ходе тестирования.</li>
+      </ul>
+      
+      <h3 class="font-bold text-lg mb-4">3. Защита данных</h3>
+      <p class="mb-4">Мы не передаём ваши данные третьим лицам. Хранение осуществляется на защищённых серверах.</p>
+      
+      <h3 class="font-bold text-lg mb-4">4. Согласие</h3>
+      <p>Отправляя форму, вы соглашаетесь с настоящей политикой.</p>
+    `;
+    
+    const termsContent = `
+      <h3 class="font-bold text-lg mb-4">1. Общие положения</h3>
+      <p class="mb-4">Настоящее Соглашение определяет порядок обработки персональных данных пользователей сайта «СтройконтрольИмастер».</p>
+      
+      <h3 class="font-bold text-lg mb-4">2. Персональные данные</h3>
+      <p class="mb-2">К персональным данным относятся:</p>
+      <ul class="list-disc pl-6 mb-4 space-y-2">
+        <li>ФИО;</li>
+        <li>Контактный телефон;</li>
+        <li>Наименование организации;</li>
+        <li>Город проживания;</li>
+        <li>Должность.</li>
+      </ul>
+      
+      <h3 class="font-bold text-lg mb-4">3. Цели обработки</h3>
+      <p class="mb-4">Персональные данные обрабатываются в целях обеспечения связи с пользователем и улучшения качества разрабатываемого продукта.</p>
+      
+      <h3 class="font-bold text-lg mb-4">4. Права пользователя</h3>
+      <p>Пользователь имеет право запросить удаление своих персональных данных, направив запрос через Telegram.</p>
+    `;
+    
+    function openModal(type) {
+      event.preventDefault();
+      const modal = document.getElementById('modal');
+      const title = document.getElementById('modalTitle');
+      const content = document.getElementById('modalContent');
+      
+      if (type === 'privacy') {
+        title.textContent = 'Политика конфиденциальности';
+        content.innerHTML = privacyContent;
+      } else {
+        title.textContent = 'Соглашение о персональных данных';
+        content.innerHTML = termsContent;
+      }
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+    
+    // Close modal on backdrop click
+    document.getElementById('modal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        closeModal();
+      }
+    });
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
